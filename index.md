@@ -12,7 +12,7 @@ hero:
   actions:
     - theme: brand  #主题
       text: 学习笔记 # 按钮文字
-      link: /src/view/learningNotes/api-examples # 跳转链接
+      link: /src/view/learningNotes/blogs # 跳转链接
 
     - theme: alt
       text: 知识汇总
