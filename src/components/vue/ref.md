@@ -40,8 +40,7 @@ interface Ref<T> {
 
 <span style="color:red">注意被 ref 包装之后需要 .value 来进行赋值</span>
 
-**isRef**
-
+### isRef
 判断是不是一个 ref 对象
 
 ```tsx
@@ -55,7 +54,7 @@ const changeMsg = () => {
 };
 ```
 
-**shallowRef**
+### shallowRef
 
 创建一个跟踪自身 .value 变化的 ref , 但不会使其值也变成响应式的
 
@@ -107,7 +106,7 @@ const changeMsg = () => {
 };
 ```
 
-**triggerRef**
+### triggerRef
 
 强制更新页面 DOM
 
@@ -140,7 +139,7 @@ const changeMsg = () => {
 </style>
 ```
 
-**customRef**
+### customRef
 
 自定义 ref
 
@@ -215,7 +214,7 @@ console.log(dom.value?.innerText,'获取文本信息')
 </style>
 ```
 
-**总结：**
+### 总结：
 
 1.**Ref** 和 **shallowRef** 对比 **shallowRef** 只是浅层次的响应，只到 <span class="fontColor"> **.value** </span> 部分
 
@@ -229,7 +228,7 @@ console.log(dom.value?.innerText,'获取文本信息')
 
 6.Ref 获取元素信息的时候一般不要放到 setup 里面， 因为那个时候的 dom 还没有渲染完成，获取不到 dom 信息，可以放到 onMountend 生命周期中
 
-**Ref 源码分析**
+### Ref 源码分析
 
 1. ref 在 引用类型的时候其实是调用了 reactive 进行值的修改，对基本类型的值直接返回，这个时候进行了判断是不是 ref 对象，是的话直接返回，不是的话去创建一个 ref 对象
 2. ref 和 shallowRef 两者区分是在源码中有一个 createRef 的函数中进行传值 true 和 false ,如果是 true 就直接返回 value , 如果是 false 就会到 toReactive 函数中，判断是否引用类型 ，如果是就会执行 reactive 不是直接返回 value
