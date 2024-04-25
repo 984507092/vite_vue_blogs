@@ -11,11 +11,12 @@ hero:
     alt: 背景图片
   actions:
     - theme: brand  #主题
-      text: Markdown 示例 # 按钮文字
-      link: /markdown-examples # 跳转链接
+      text: 学习笔记 # 按钮文字
+      link: /src/view/learningNotes/api-examples # 跳转链接
+
     - theme: alt
-      text: API 示例
-      link: /api-examples
+      text: 知识汇总
+      link: /src/view/blogs/Vue
 features:
   - title: 鹤鸣1
     details: 特征1的详细描述

@@ -12,6 +12,12 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "naive-ui": "^2.38.1",
+    "vfonts": "^0.0.3",
     "vitepress": "^1.0.1"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "sass": "^1.75.0"
   }
 }
