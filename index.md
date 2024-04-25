@@ -16,7 +16,7 @@ hero:
 
     - theme: alt
       text: 知识汇总
-      link: /src/view/blogs/Vue
+      link: /src/view/blogs/1.Vue
 features:
   - title: 鹤鸣1
     details: 特征1的详细描述

@@ -1,7 +1,15 @@
-import { set_sidebar } from "./auto-gen-sidebar.mjs";
+import formatDataSidebar from "./formatDataSidebar";
+let arr = [
+  {
+    text: "学习",
+    link: "src/view/blogs",
+  },
+  {
+    text: "博客",
+    link: "src/view/learningNotes",
+  },
+];
 
-export let mySidebar = {
-  "/src/view/blogs/": set_sidebar("/blogs/"),
-  "/src/view/learningNotes/": set_sidebar("/learningNotes/"),
+export default {
+  ...formatDataSidebar(arr),
 };
-

@@ -1,13 +1,21 @@
 // 为什么这里要用nodejs替代 createContentLoader
 // createContentLoader 是一个用于 VitePress 插件或主题的辅助函数
 // 它需要在 VitePress 进程启动后或 VitePress 配置解析完成后才能被调用
-import path from "node:path";
-import fs from "node:fs";
+import path from 'node:path'
+import fs from 'node:fs'
 
 // 这里根据自己文件实际进行调整
-const projectName = '/src/view/';
+// const projectName = '';
 // 文件根目录
-const DIR_PATH = path.resolve() + projectName;
+const DIR_PATH = path.resolve();
+
+// 添加以下两句话，让代码可以兼容window和linux启动路径问题
+// 确保路径的斜杠方向
+const normalizedPath = path.normalize(DIR_PATH);
+
+// 确保路径的斜杠方向和正确的分隔符
+const platformIndependentPath = normalizedPath.replace(/\\/g, '/');
+
 // 白名单,过滤不是文章的文件和文件夹
 const WHITE_LIST = [
     "index.md",
@@ -15,33 +23,33 @@ const WHITE_LIST = [
     "node_modules",
     ".idea",
     "assets",
-];
+]
+
 
 // 判断是否是文件夹
-const isDirectory = (path) => fs.lstatSync(path).isDirectory();
+const isDirectory = (path) => fs.lstatSync(path).isDirectory()
 
 // 取差值
-const intersections = (arr1, arr2) =>
-    Array.from(new Set(arr1.filter((item) => !new Set(arr2).has(item))));
+const intersections = (arr1, arr2) => Array.from(new Set(arr1.filter((item) => !new Set(arr2).has(item))))
 
 // 把方法导出直接使用
 function getList(params, path1, pathname) {
     // 存放结果
-    const res = [];
+    const res = []
     // 开始遍历params
     for (let file in params) {
         // 拼接目录
-        const dir = path.join(path1, params[file]);
+        const dir = path.join(path1, params[file])
         // 判断是否是文件夹
-        const isDir = isDirectory(dir);
+        const isDir = isDirectory(dir)
         if (isDir) {
             // 如果是文件夹,读取之后作为下一次递归参数
-            const files = fs.readdirSync(dir);
+            const files = fs.readdirSync(dir)
             res.push({
                 text: params[file],
                 collapsible: true,
                 items: getList(files, dir, `${pathname}/${params[file]}`),
-            });
+            })
         } else {
             // 获取名字
             const name = path.basename(params[file]);
@@ -52,24 +60,33 @@ function getList(params, path1, pathname) {
             }
             res.push({
                 text: name,
-                link: `${projectName}${pathname}/${name}`,
+                link: `${name}`,
             });
         }
     }
+    res.sort((a, b) => {
+        let indexA = a.link.split(".")[0]
+        let indexB = b.link.split(".")[0]
+        return indexA - indexB;
+    })
     // 对name做一下处理，把后缀删除
     res.map((item) => {
         item.text = item.text.replace(/\.md$/, "");
     });
-    return res;
+    // 如果base少一个左斜杠会导致高亮、上一页、下一页失效
+    return {
+        base: `/${pathname}/`,
+        items: res
+    }
 }
 
 export const set_sidebar = (pathname) => {
     // 获取pathname的路径
-    const dirPath = path.join(DIR_PATH, pathname);
+    const dirPath = path.join(platformIndependentPath, pathname)
     // 读取pathname下的所有文件或者文件夹
-    const files = fs.readdirSync(dirPath);
+    const files = fs.readdirSync(dirPath)
     // 过滤掉
-    const items = intersections(files, WHITE_LIST);
+    const items = intersections(files, WHITE_LIST)
     // getList 函数后面会讲到
-    return getList(items, dirPath, pathname);
-};
+    return getList(items, dirPath, pathname)
+}

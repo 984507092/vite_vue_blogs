@@ -1,5 +1,5 @@
-import { defineConfig } from 'vitepress'
-import {mySidebar} from "./utils/sidebar_blog"
+import { defineConfig } from "vitepress";
+import mySidebar from "./utils/sidebar_blog";
 
 export default defineConfig({
   // base: "/vite-personal-blog/",
@@ -7,6 +7,7 @@ export default defineConfig({
   head: [["link", { rel: "icon", href: "/logo.png" }]],
   title: "鹤鸣的文档项目",
   description: "A VitePress Site",
+  outDir: "../dist",
   themeConfig: {
     outlineTitle: "文章目录",
     outline: [2, 6],
@@ -59,7 +60,10 @@ export default defineConfig({
         link: "https://gitee.com/li-shengao",
       },
     ],
-    footer: { copyright: `Copyright © 2024-present He Ming` },
+    footer: {
+      message: "Released under the MIT License.",
+      copyright: `Copyright © 2024-present He Ming`,
+    },
     // 设置搜索框的样式
     search: {
       provider: "local",
@@ -80,5 +84,15 @@ export default defineConfig({
         },
       },
     },
+    docFooter: {
+      prev: "上一页",
+      next: "下一页",
+    },
+    langMenuLabel: "多语言",
+    returnToTopLabel: "回到顶部",
+    sidebarMenuLabel: "菜单",
+    darkModeSwitchLabel: "主题",
+    lightModeSwitchTitle: "切换到浅色模式",
+    darkModeSwitchTitle: "切换到深色模式",
   },
 });
