@@ -15,7 +15,19 @@ export default defineConfig({
     // 导航栏
     nav: [
       { text: "首页", link: "/" },
-      { text: "学习", link: "/view/learningNotes/markdown-examples" },
+      {
+        text: "学习", 
+        items: [
+          {
+            text: "TypeScript",
+            link: "/view/blogs/typescript/1.TypeScript.md"
+          },
+          {
+            text: "Vue",
+            link: "/view/blogs/vue/1.Ref.md"
+          },
+        ]
+      },
       {
         text: "前端",
         items: [
