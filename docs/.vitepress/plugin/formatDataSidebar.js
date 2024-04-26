@@ -7,6 +7,7 @@ export default function formatDataSidebar(arr, style = false) {
     if (Array.isArray(data.items) && data.items.length > 0) {
       data.items.forEach((key) => {
         if (key.items && typeof key.items === 'object') {
+          // 格式一
           let s1 = {
             base: key.items.base,
             items: [
@@ -17,6 +18,7 @@ export default function formatDataSidebar(arr, style = false) {
               }
             ]
           }
+          // 格式二
           let s2 = [{
             base: key.items.base,
             items: [
