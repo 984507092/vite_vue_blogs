@@ -7,27 +7,29 @@ export default function formatDataSidebar(arr, style = false) {
     if (Array.isArray(data.items) && data.items.length > 0) {
       data.items.forEach((key) => {
         if (key.items && typeof key.items === 'object') {
+          let s1 = {
+            base: key.items.base,
+            items: [
+              {
+                text: key.text,
+                collapsible: key.collapsible,
+                items: key.items.items
+              }
+            ]
+          }
+          let s2 = [{
+            base: key.items.base,
+            items: [
+              {
+                text: key.text,
+                collapsible: key.collapsible,
+                items: key.items.items
+              }
+            ]
+          }]
           mySidebar = {
             ...mySidebar,
-            [key.items.base]: !style ? {
-              base: key.items.base,
-              items: [
-                {
-                  text: key.text,
-                  collapsible: key.collapsible,
-                  items: key.items.items
-                }
-              ]
-            } : [{
-              base: key.items.base,
-              items: [
-                {
-                  text: key.text,
-                  collapsible: key.collapsible,
-                  items: key.items.items
-                }
-              ]
-            }]
+            [key.items.base]: !style ? s1 : s2
           }
         } else {
           mySidebar = {
