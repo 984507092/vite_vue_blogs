@@ -1,4 +1,4 @@
-// node_modules/@vue/shared/dist/shared.esm-bundler.js
+// ../../../node_modules/@vue/shared/dist/shared.esm-bundler.js
 function makeMap(str, expectsLowerCase) {
   const set2 = new Set(str.split(","));
   return expectsLowerCase ? (val) => set2.has(val.toLowerCase()) : (val) => set2.has(val);
@@ -287,7 +287,7 @@ var stringifySymbol = (v, i = "") => {
   );
 };
 
-// node_modules/@vue/reactivity/dist/reactivity.esm-bundler.js
+// ../../../node_modules/@vue/reactivity/dist/reactivity.esm-bundler.js
 function warn(msg, ...args) {
   console.warn(`[Vue warn] ${msg}`, ...args);
 }
@@ -1472,7 +1472,7 @@ var TriggerOpTypes = {
   "CLEAR": "clear"
 };
 
-// node_modules/@vue/runtime-core/dist/runtime-core.esm-bundler.js
+// ../../../node_modules/@vue/runtime-core/dist/runtime-core.esm-bundler.js
 var stack = [];
 function pushWarningContext(vnode) {
   stack.push(vnode);
@@ -2315,21 +2315,21 @@ function renderComponentRoot(instance) {
     vnode,
     proxy,
     withProxy,
+    props,
     propsOptions: [propsOptions],
     slots,
     attrs,
     emit: emit2,
     render: render2,
     renderCache,
-    props,
     data,
     setupState,
     ctx,
     inheritAttrs
   } = instance;
-  const prev = setCurrentRenderingInstance(instance);
   let result;
   let fallthroughAttrs;
+  const prev = setCurrentRenderingInstance(instance);
   if (true) {
     accessedAttrs = false;
   }
@@ -2351,7 +2351,7 @@ function renderComponentRoot(instance) {
           thisProxy,
           proxyToUse,
           renderCache,
-          true ? shallowReadonly(props) : props,
+          props,
           setupState,
           data,
           ctx
@@ -2365,7 +2365,7 @@ function renderComponentRoot(instance) {
       }
       result = normalizeVNode(
         render22.length > 1 ? render22(
-          true ? shallowReadonly(props) : props,
+          props,
           true ? {
             get attrs() {
               markAttrsAccessed();
@@ -2375,8 +2375,9 @@ function renderComponentRoot(instance) {
             emit: emit2
           } : { attrs, slots, emit: emit2 }
         ) : render22(
-          true ? shallowReadonly(props) : props,
+          props,
           null
+          /* we know it doesn't need it */
         )
       );
       fallthroughAttrs = Component.props ? attrs : getFunctionalFallthrough(attrs);
@@ -3860,21 +3861,11 @@ function emptyPlaceholder(vnode) {
   }
 }
 function getKeepAliveChild(vnode) {
-  if (!isKeepAlive(vnode)) {
-    return vnode;
-  }
-  if (vnode.component) {
-    return vnode.component.subTree;
-  }
-  const { shapeFlag, children } = vnode;
-  if (children) {
-    if (shapeFlag & 16) {
-      return children[0];
-    }
-    if (shapeFlag & 32 && isFunction(children.default)) {
-      return children.default();
-    }
-  }
+  return isKeepAlive(vnode) ? (
+    // #7121 ensure get the child component subtree in case
+    // it's been replaced during HMR
+    vnode.component ? vnode.component.subTree : vnode.children ? vnode.children[0] : void 0
+  ) : vnode;
 }
 function setTransitionHooks(vnode, hooks) {
   if (vnode.shapeFlag & 6 && vnode.component) {
@@ -5465,7 +5456,7 @@ function inject(key, defaultValue, treatDefaultAsFactory = false) {
 function hasInjectionContext() {
   return !!(currentInstance || currentRenderingInstance || currentApp);
 }
-var internalObjectProto = {};
+var internalObjectProto = /* @__PURE__ */ Object.create(null);
 var createInternalObject = () => Object.create(internalObjectProto);
 var isInternalObject = (obj) => Object.getPrototypeOf(obj) === internalObjectProto;
 function initProps(instance, rawProps, isStateful, isSSR = false) {
@@ -5928,17 +5919,22 @@ var normalizeVNodeSlots = (instance, children) => {
   instance.slots.default = () => normalized;
 };
 var initSlots = (instance, children) => {
-  const slots = instance.slots = createInternalObject();
   if (instance.vnode.shapeFlag & 32) {
     const type = children._;
     if (type) {
-      extend(slots, children);
-      def(slots, "_", type);
+      instance.slots = toRaw(children);
+      def(instance.slots, "_", type);
     } else {
-      normalizeObjectSlots(children, slots);
+      normalizeObjectSlots(
+        children,
+        instance.slots = createInternalObject()
+      );
     }
-  } else if (children) {
-    normalizeVNodeSlots(instance, children);
+  } else {
+    instance.slots = createInternalObject();
+    if (children) {
+      normalizeVNodeSlots(instance, children);
+    }
   }
 };
 var updateSlots = (instance, children, optimized) => {
@@ -9599,7 +9595,7 @@ function isMemoSame(cached, memo) {
   }
   return true;
 }
-var version = "3.4.25";
+var version = "3.4.23";
 var warn2 = true ? warn$1 : NOOP;
 var ErrorTypeStrings = ErrorTypeStrings$1;
 var devtools = true ? devtools$1 : void 0;
@@ -9617,7 +9613,7 @@ var resolveFilter = null;
 var compatUtils = null;
 var DeprecationTypes = null;
 
-// node_modules/@vue/runtime-dom/dist/runtime-dom.esm-bundler.js
+// ../../../node_modules/@vue/runtime-dom/dist/runtime-dom.esm-bundler.js
 var svgNS = "http://www.w3.org/2000/svg";
 var mathmlNS = "http://www.w3.org/1998/Math/MathML";
 var doc = typeof document !== "undefined" ? document : null;
@@ -9803,8 +9799,8 @@ function resolveTransitionProps(rawProps) {
       el._isLeaving = true;
       const resolve2 = () => finishLeave(el, done);
       addTransitionClass(el, leaveFromClass);
-      addTransitionClass(el, leaveActiveClass);
       forceReflow();
+      addTransitionClass(el, leaveActiveClass);
       nextFrame(() => {
         if (!el._isLeaving) {
           return;
@@ -11215,7 +11211,7 @@ var initDirectivesForSSR = () => {
   }
 };
 
-// node_modules/vue/dist/vue.runtime.esm-bundler.js
+// ../../../node_modules/vue/dist/vue.runtime.esm-bundler.js
 function initDev() {
   {
     initCustomFormatter();
@@ -11397,7 +11393,7 @@ export {
 
 @vue/shared/dist/shared.esm-bundler.js:
   (**
-  * @vue/shared v3.4.25
+  * @vue/shared v3.4.23
   * (c) 2018-present Yuxi (Evan) You and Vue contributors
   * @license MIT
   **)
@@ -11405,14 +11401,14 @@ export {
 
 @vue/reactivity/dist/reactivity.esm-bundler.js:
   (**
-  * @vue/reactivity v3.4.25
+  * @vue/reactivity v3.4.23
   * (c) 2018-present Yuxi (Evan) You and Vue contributors
   * @license MIT
   **)
 
 @vue/runtime-core/dist/runtime-core.esm-bundler.js:
   (**
-  * @vue/runtime-core v3.4.25
+  * @vue/runtime-core v3.4.23
   * (c) 2018-present Yuxi (Evan) You and Vue contributors
   * @license MIT
   **)
@@ -11420,7 +11416,7 @@ export {
 
 @vue/runtime-dom/dist/runtime-dom.esm-bundler.js:
   (**
-  * @vue/runtime-dom v3.4.25
+  * @vue/runtime-dom v3.4.23
   * (c) 2018-present Yuxi (Evan) You and Vue contributors
   * @license MIT
   **)
@@ -11428,9 +11424,9 @@ export {
 
 vue/dist/vue.runtime.esm-bundler.js:
   (**
-  * vue v3.4.25
+  * vue v3.4.23
   * (c) 2018-present Yuxi (Evan) You and Vue contributors
   * @license MIT
   **)
 */
-//# sourceMappingURL=chunk-5QLTCEDZ.js.map
+//# sourceMappingURL=chunk-UPXIPTJL.js.map
