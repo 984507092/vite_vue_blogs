@@ -8,6 +8,10 @@ let arr = [
     text: "博客",
     link: "view/learningNotes",
   },
+  {
+    text: "问题",
+    link: "view/problem",
+  },
 ];
 
 export default {
