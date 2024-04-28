@@ -2,9 +2,9 @@ import {
   isReactive,
   isRef,
   toRaw
-} from "./chunk-UPXIPTJL.js";
+} from "./chunk-GNWCGSRR.js";
 
-// node_modules/.pnpm/@vue+devtools-shared@7.0.23/node_modules/@vue/devtools-shared/dist/index.js
+// node_modules/.pnpm/@vue+devtools-shared@7.1.2/node_modules/@vue/devtools-shared/dist/index.js
 var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -34,7 +34,7 @@ var __toESM = (mod, isNodeMode, target2) => (target2 = mod != null ? __create(__
   mod
 ));
 var init_esm_shims = __esm({
-  "../../node_modules/.pnpm/tsup@8.0.2_postcss@8.4.38_typescript@5.4.3/node_modules/tsup/assets/esm_shims.js"() {
+  "../../node_modules/.pnpm/tsup@8.0.2_@microsoft+api-extractor@7.43.0_@types+node@20.12.7__postcss@8.4.38_typescript@5.4.5/node_modules/tsup/assets/esm_shims.js"() {
     "use strict";
   }
 });
@@ -520,7 +520,7 @@ async function _applyPromised(fn, _this, args) {
   return await fn.apply(_this, args);
 }
 
-// node_modules/.pnpm/@vue+devtools-kit@7.0.23_vue@3.4.21/node_modules/@vue/devtools-kit/dist/index.js
+// node_modules/.pnpm/@vue+devtools-kit@7.1.2_vue@3.4.25/node_modules/@vue/devtools-kit/dist/index.js
 var __create2 = Object.create;
 var __defProp2 = Object.defineProperty;
 var __getOwnPropDesc2 = Object.getOwnPropertyDescriptor;
@@ -550,7 +550,7 @@ var __toESM2 = (mod, isNodeMode, target10) => (target10 = mod != null ? __create
   mod
 ));
 var init_esm_shims2 = __esm2({
-  "../../node_modules/.pnpm/tsup@8.0.2_postcss@8.4.38_typescript@5.4.3/node_modules/tsup/assets/esm_shims.js"() {
+  "../../node_modules/.pnpm/tsup@8.0.2_@microsoft+api-extractor@7.43.0_@types+node@20.12.7__postcss@8.4.38_typescript@5.4.5/node_modules/tsup/assets/esm_shims.js"() {
     "use strict";
   }
 });
@@ -2105,6 +2105,9 @@ var on = {
   vueAppInit(fn) {
     devtoolsHooks.hook("app:init", fn);
   },
+  vueAppUnmount(fn) {
+    devtoolsHooks.hook("app:unmount", fn);
+  },
   vueAppConnected(fn) {
     devtoolsHooks.hook("app:connected", fn);
   },
@@ -2173,7 +2176,7 @@ function filterCurrentRoute(route) {
   }
   return route;
 }
-function normalizeRouterInfo(appRecord) {
+function normalizeRouterInfo(appRecord, state) {
   function init() {
     var _a10;
     const router = (_a10 = appRecord.app) == null ? void 0 : _a10.config.globalProperties.$router;
@@ -2191,6 +2194,9 @@ function normalizeRouterInfo(appRecord) {
   }
   init();
   hook.on.componentUpdated(debounce(() => {
+    var _a10;
+    if (((_a10 = state.activeAppRecord) == null ? void 0 : _a10.app) !== appRecord.app)
+      return;
     init();
     apiHooks.callHook("router-info:updated", target[ROUTER_INFO_KEY]);
   }, 200));
@@ -2515,7 +2521,7 @@ var devtoolsAppRecords = new Proxy(devtoolsState.appRecords, {
       devtoolsContext.appRecord = _value;
       devtoolsContext.api = _value.api;
       devtoolsContext.inspector = (_a10 = _value.inspector) != null ? _a10 : [];
-      normalizeRouterInfo(value);
+      normalizeRouterInfo(value, devtoolsState);
       devtoolsContext.routerInfo = devtoolsRouterInfo;
     } else if (property === "activeId") {
       devtoolsState.activeAppRecordId = value;
@@ -2528,7 +2534,7 @@ var devtoolsAppRecords = new Proxy(devtoolsState.appRecords, {
 });
 var _a8;
 var _b8;
-var appRecordInfo = (_b8 = (_a8 = target).__VUE_DEVTOOLS_APP_RECROD_INFO__) != null ? _b8 : _a8.__VUE_DEVTOOLS_APP_RECROD_INFO__ = {
+var appRecordInfo = (_b8 = (_a8 = target).__VUE_DEVTOOLS_NEXT_APP_RECROD_INFO__) != null ? _b8 : _a8.__VUE_DEVTOOLS_NEXT_APP_RECROD_INFO__ = {
   id: 0,
   appIds: /* @__PURE__ */ new Set()
 };
