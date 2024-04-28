@@ -1,7 +1,13 @@
 import { defineConfig } from "vitepress";
 import mySidebar from "./plugin/sidebar_blog.js";
+import UnoCSS from 'unocss/vite'
 
 export default defineConfig({
+  vite: {
+    plugins: [
+      UnoCSS(),
+    ],
+  },
   // base: "/vite-personal-blog/",
   // head: [["link", { rel: "icon", href: "/vite-personal-blog/logo.png" }]],
   head: [["link", { rel: "icon", href: "/logo.png" }]],
@@ -15,15 +21,24 @@ export default defineConfig({
     // 导航栏
     nav: [
       { text: "首页", link: "/" },
+      { text: "问题记录", link: "/view/问题记录.md" },
       {
-        text: "学习", 
+        text: "学习",
         items: [
+          {
+            text: "Vue",
+            link: "/view/blogs/vue/1.Ref.md"
+          },
+          {
+            text: "React",
+            link: "/view/blogs/vue/1.Ref.md"
+          },
           {
             text: "TypeScript",
             link: "/view/blogs/typescript/1.TypeScript.md"
           },
           {
-            text: "Vue",
+            text: "uniapp",
             link: "/view/blogs/vue/1.Ref.md"
           },
         ]

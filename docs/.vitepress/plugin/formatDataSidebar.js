@@ -47,7 +47,7 @@ export default function formatDataSidebar(arr, style = false) {
               items: [
                 {
                   text: item.text,
-                  items: data.items,
+                  items: data.items && data.items.length > 0 ? data.items.reverse() : data.items,
                 },
               ],
             },

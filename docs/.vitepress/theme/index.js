@@ -8,6 +8,10 @@ import naive from 'naive-ui'
 import 'vfonts/Lato.css'
 import Layout from "./Layout.vue"
 
+// vite如下配置
+import 'virtual:uno.css'
+
+
 /** @type {import('vitepress').Theme} */
 export default {
   extends: DefaultTheme,
