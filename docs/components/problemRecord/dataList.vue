@@ -14,9 +14,9 @@
           v-for="(item,index) in page"
           :key="index"
         >
-          <div>
+          <div class="flex flex-items-center">
             <span>{{index + 1}}、</span>
-            <a :href="item.url">{{ item.title }}</a>
+            <a :href="item.link">{{ item.title }}</a>
           </div>
           <span class="time-str c-#999">{{ item.date }}</span>
         </li>

@@ -18,9 +18,9 @@ const pages = createContentLoader("view/problem/*.md", {
         // page.html; // 渲染的整页 HTM
         // page.excerpt; // 渲染的摘录 HTML（第一个 `---` 上面的内容）
         return {
-          ...page,
           title: page.url.split('/')[3],
           date: dayjs(page.frontmatter.date).format("YYYY-MM-DD"),
+          link: 'vite_vue_blogs' + page.url
         };
       });
   },
