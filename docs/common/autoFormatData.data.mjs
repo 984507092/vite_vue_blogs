@@ -1,8 +1,9 @@
 // posts.data.js
 import { createContentLoader } from "vitepress";
+import dayjs from 'dayjs'
 
 const pages = createContentLoader("view/problem/*.md", {
-  includeSrc: true, // 包含原始 markdown 源?
+  includeSrc: false, // 包含原始 markdown 源?
   render: false, // 包含渲染的整页 HTML?
   excerpt: false, // 包含摘录?
   transform(rawData) {
@@ -19,6 +20,7 @@ const pages = createContentLoader("view/problem/*.md", {
         return {
           ...page,
           title: page.url.split('/')[3],
+          date: dayjs(page.frontmatter.date).format("YYYY-MM-DD"),
         };
       });
   },

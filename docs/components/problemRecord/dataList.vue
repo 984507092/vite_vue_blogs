@@ -9,9 +9,16 @@
     </div>
     <div>
       <ul>
-        <li v-for="(item,index) in page">
-          <span>{{index + 1}}、</span>
-          <a :href="item.url">{{item.title}}</a>
+        <li
+          class="flex flex-items-center justify-between"
+          v-for="(item,index) in page"
+          :key="index"
+        >
+          <div>
+            <span>{{index + 1}}、</span>
+            <a :href="item.url">{{ item.title }}</a>
+          </div>
+          <span class="time-str c-#999">{{ item.date }}</span>
         </li>
       </ul>
     </div>
@@ -19,8 +26,12 @@
 </template>
 
 <script setup lang='ts'>
-import { ref, reactive } from "vue";
+import { ref, reactive, onMounted } from "vue";
 import { data as page } from "../../common/autoFormatData.data.mjs";
+
+onMounted(() => {
+  console.log(page);
+});
 </script>
 
 <style lang='scss' scoped>
