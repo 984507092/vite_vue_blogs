@@ -20,7 +20,7 @@ const pages = createContentLoader("view/problem/*.md", {
         return {
           title: page.url.split('/')[3],
           date: dayjs(page.frontmatter.date).format("YYYY-MM-DD"),
-          link: 'vite_vue_blogs' + page.url
+          link: 'problem/' + page.url.split('/')[3],
         };
       });
   },
