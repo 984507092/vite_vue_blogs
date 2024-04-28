@@ -31,16 +31,16 @@ export default defineConfig({
           },
           {
             text: "React",
-            link: "/view/blogs/vue/1.Ref.md"
+            link: "/view/blogs/react/1.React快速上手.md"
           },
           {
             text: "TypeScript",
             link: "/view/blogs/typescript/1.TypeScript.md"
           },
-          {
-            text: "uniapp",
-            link: "/view/blogs/vue/1.Ref.md"
-          },
+          // {
+          //   text: "uniapp",
+          //   link: "/view/blogs/vue/1.Ref.md"
+          // },
         ]
       },
       {
