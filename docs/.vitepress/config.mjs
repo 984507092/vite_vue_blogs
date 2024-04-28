@@ -13,7 +13,7 @@ export default defineConfig({
   // head: [["link", { rel: "icon", href: "/logo.png" }]],
   title: "鹤鸣的文档项目",
   description: "A VitePress Site",
-  outDir: "../dist",
+  // outDir: "./dist",
   themeConfig: {
     outlineTitle: "文章目录",
     outline: [2, 6],
