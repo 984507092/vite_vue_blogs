@@ -158,7 +158,11 @@ import {
   withMemo,
   withModifiers,
   withScopeId
+<<<<<<< HEAD:.vitepress/cache/deps/vue.js
 } from "./chunk-GNWCGSRR.js";
+=======
+} from "./chunk-UPXIPTJL.js";
+>>>>>>> 10f33b96a1664d4933f72c0e0f77107a8e0b2bec:.vitepress/cache/deps_temp_13d938e7/vue.js
 export {
   BaseTransition,
   BaseTransitionPropsValidators,
