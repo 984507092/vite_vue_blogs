@@ -20,7 +20,7 @@ const pages = createContentLoader("view/problem/*.md", {
         return {
           title: page.url.split('/')[3],
           date: dayjs(page.frontmatter.date).format("YYYY-MM-DD"),
-          link: 'problem/' + page.url.split('/')[3],
+          link: page.url.split('/view/')[1],
         };
       });
   },

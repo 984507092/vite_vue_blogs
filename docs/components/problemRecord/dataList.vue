@@ -28,10 +28,6 @@
 <script setup lang='ts'>
 import { ref, reactive, onMounted } from "vue";
 import { data as page } from "../../common/autoFormatData.data.mjs";
-
-onMounted(() => {
-  console.log(page);
-});
 </script>
 
 <style lang='scss' scoped>
