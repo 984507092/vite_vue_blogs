@@ -12,6 +12,10 @@ let arr = [
     text: "问题",
     link: "view/problem",
   },
+  {
+    text: "TS问题",
+    link: "view/typescript-problem",
+  },
 ];
 
 export default {
