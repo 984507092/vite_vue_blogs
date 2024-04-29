@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <div class="flex flex-items-center justify-between">
-      <h3 class="!m-0 p-0">TS问题文章总数：</h3>
+      <h3 class="!m-0 p-0">TS问题文章：</h3>
       <div>
         一共
         <strong>{{ page.length }}</strong> 篇
