@@ -16,7 +16,7 @@
         >
           <div class="flex flex-items-center">
             <span>{{index + 1}}、</span>
-            <a :href="item.link">{{ item.title }}</a>
+            <a target="_blank" :href="item.link">{{ item.title }}</a>
           </div>
           <span class="time-str c-#999">{{ item.date }}</span>
         </li>
