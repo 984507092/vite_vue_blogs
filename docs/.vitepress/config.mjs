@@ -37,10 +37,10 @@ export default defineConfig({
             text: "TypeScript",
             link: "/view/blogs/typescript/1.TypeScript.md"
           },
-          // {
-          //   text: "uniapp",
-          //   link: "/view/blogs/vue/1.Ref.md"
-          // },
+          {
+            text: "webpack",
+            link: "/view/blogs/webpack/1.搭建最简单的webpack"
+          },
         ]
       },
       {
