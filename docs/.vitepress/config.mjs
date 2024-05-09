@@ -128,6 +128,7 @@ export default defineConfig({
       prev: "上一页",
       next: "下一页",
     },
+    // lastUpdated: true,
     langMenuLabel: "多语言",
     returnToTopLabel: "回到顶部",
     sidebarMenuLabel: "菜单",
