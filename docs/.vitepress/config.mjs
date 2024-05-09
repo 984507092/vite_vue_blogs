@@ -14,6 +14,13 @@ export default defineConfig({
   title: "鹤鸣的文档项目",
   description: "A VitePress Site",
   // outDir: "./dist",
+  markdown: {
+    image: {
+      // 默认禁用图片懒加载
+      lazyLoading: true
+    }
+  },
+  assetsDir: 'static',
   themeConfig: {
     outlineTitle: "文章目录",
     outline: [2, 6],

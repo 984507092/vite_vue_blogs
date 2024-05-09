@@ -1,3 +1,7 @@
+---
+date: 2024-05-06
+---
+
 # 模拟Promise.all 的实现
 
 ```javascript

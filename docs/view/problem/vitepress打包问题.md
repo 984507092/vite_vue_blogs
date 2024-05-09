@@ -1,3 +1,7 @@
+---
+date: 2024-04-23
+---
+
 # vitepress打包问题
 
 ::: warning

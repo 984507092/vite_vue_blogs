@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<script setup lang='ts'>
+<script setup lang="ts">
 import { useData } from "vitepress";
 import DefaultTheme from "vitepress/theme";
 import { nextTick, provide } from "vue";
@@ -36,7 +36,7 @@ provide("toggle-appearance", async ({ clientX: x, clientY: y }: MouseEvent) => {
   document.documentElement.animate(
     { clipPath: isDark.value ? clipPath.reverse() : clipPath },
     {
-      duration: 500,
+      duration: 300,
       easing: "ease-in",
       pseudoElement: `::view-transition-${isDark.value ? "old" : "new"}(root)`
     }
@@ -44,7 +44,7 @@ provide("toggle-appearance", async ({ clientX: x, clientY: y }: MouseEvent) => {
 });
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation: none;
