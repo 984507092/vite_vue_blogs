@@ -36,3 +36,11 @@ features:
     link: https://www.naiveui.com/zh-CN/os-theme
 ---
 
+<script setup> 
+import { defineClientComponent } from 'vitepress'
+const weather = defineClientComponent(async () => {
+  return await import('./components/weather.vue')
+})
+</script>
+
+<weather></weather>

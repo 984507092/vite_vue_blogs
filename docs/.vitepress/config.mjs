@@ -3,20 +3,21 @@ import mySidebar from "./plugin/sidebar_blog.js";
 import UnoCSS from 'unocss/vite'
 
 export default defineConfig({
-  server: {
-    proxy: {
-      '/api': {
-        target: 'http://127.0.0.1:3000',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, '')
-      }
-    }
-  },
   vite: {
     plugins: [
       UnoCSS(),
     ],
+    server: {
+      proxy: {
+        '/api': {
+          target: 'http://127.0.0.1:3000',
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/api/, '')
+        }
+      }
+    },
   },
+
   base: "/vite_vue_blogs/",
   head: [["link", { rel: "icon", href: "/vite_vue_blogs/logo.png" }]],
   // head: [["link", { rel: "icon", href: "/logo.png" }]],
