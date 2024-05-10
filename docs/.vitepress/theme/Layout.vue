@@ -1,6 +1,7 @@
 <template>
   <div>
     <DefaultTheme.Layout />
+    <www></www>
   </div>
 </template>
 
@@ -8,6 +9,7 @@
 import { useData } from "vitepress";
 import DefaultTheme from "vitepress/theme";
 import { nextTick, provide } from "vue";
+import www from "./weather.vue"
 const { isDark } = useData();
 
 const enableTransitions = () =>
