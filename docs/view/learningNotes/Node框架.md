@@ -1,0 +1,142 @@
+---
+title: Node框架
+author: 皮明宇
+date: 2024.04.05
+---
+
+# Node 框架介绍
+
+## express / koa
+写一个函数的编排功能
+price -> pipe -> result
+```js
+    // 衬衫的售卖
+    function discount(total) {
+        return total * 0.8
+    }
+
+    function express(total) {
+        return total + 12
+    }
+
+    function num(price) {
+        return 10 * price
+    }
+
+    // 纯函数
+
+    const compose = (funcArray) => (startNum) => funcArray.reduce((total, item) => item(total), startNum);
+
+    const totalMoney = compose([num, discount, express])(15);
+
+    console.log(totalMoney)
+
+```
+
+```js
+    function discount(total, next) {
+        next(total * 0.8)
+    }
+
+    function express(total, next) {
+        next(total + 12)
+    }
+
+    function num(price, next) {
+        next(price * 10)
+    }
+
+    // 纯函数
+
+    const compose = function (args) {
+        return function (ctx) {
+            let res;
+            let dispatch = function (i, ctx) {
+                // 取出第i个函数，然后以递归的方式执行，直到最后一个
+                let fn;
+                if (i === args.length) {
+                    res = ctx;
+                } else if (i < args.length) {
+                    fn = args[i];
+                    // 这里一定要是++i，不能是i++
+                    return fn(ctx, dispatch.bind(null, ++i))
+                }
+            }
+            dispatch(0, ctx)
+            return res;
+        }
+    }
+    const totalMoney = compose([num, discount, express])(15);
+
+    console.log(totalMoney)
+```
+
+```js
+    function discount(total) {
+        return total * 0.8
+    }
+
+    function express(total) {
+        return total + 12
+    }
+
+    function num(price) {
+        return price * 10
+    }
+
+    const fns = [num, discount, express];
+
+    function compose(...funcs) {
+        return funcs.reduce((total, item) => (...args) => item(total(...args)))
+    }
+
+    const compose2 = (funcArray) =>
+        (startNum) => funcArray.reduce((total, item) => item(total), startNum)
+
+    // console.log(compose(num, discount, express)(15))
+    console.log(compose2([num, discount, express])(15))
+```
+
+## BFF
+### 什么是BFF
+
+本质是一种架构的分层，而不是一种技术。
+
+### BFF 一般的作用有哪些？
+
+#### 对比传统的架构，BFF的优势：
+- 降低沟通成本，领域模型可以与页面更好的解耦；
+- 提供更好的用户体验，多端适配的场景，数据会更加的符合交互需求；
+
+#### BFF的劣势：
+- 分工问题，作为灰色地带，谁开发需要明确
+- 链路复杂，引入BFF之后，流程更复杂
+- BFF也要占用资源
+
+### 设计一个 BFF的时候，需要考虑哪些问题
+#### 数据处理
+数据聚合和裁剪
+序列化格式转换
+协议转换
+
+#### 流量处理
+请求分发
+代理
+削峰
+熔断机制
+
+#### 安全
+
+fast-gateway
+
+## Sequelize
+
+Sequelize 是一个基于promise 的Node端的ORM
+目前支持：Mysql，Postgres，SQLite，SQLserver
+
+- typeORM 比较适用于使用了ts的场景
+- prisna
+  - 在类型推导上，更加的出色
+  - rust写的查询引擎
+  - 有一套非常成熟的 dsl
+
