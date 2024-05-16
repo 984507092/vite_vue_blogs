@@ -428,8 +428,240 @@ b.安装运行
 
 
 ### 3.装饰器 - decorator
+
 ```ts
-    
+    /**
+ * 类装饰器  ClassDecorator
+ * @param target  形参  target 是形参，可以是任何名字
+ * @param  result  返回结果：构造函数
+ * @param name
+ * */
+// const Base:ClassDecorator = (target)=>{
+// 	target.prototype.heming  = "鹤鸣"
+// 	target.prototype.fn = () =>{
+// 		console.log('装饰器')
+// 	}
+// }
+ 
+// 如果用户要传参数可以使用（闭包 或者 函数柯里化 或者 工厂函数）
+const Base = (name:string) => {
+	const fn: ClassDecorator = (target) => {
+		target.prototype.heming = name
+		target.prototype.fn = () => {
+			console.log('装饰器')
+		}
+	}
+	return fn
+}
+ 
+@Base('鹤鸣')
+class Http {
+ 
+}
+ 
+const http = new Http() as any
+console.log(http.heming)
+ 
+// 或者怕不兼容可以
+class Http{
+ 
+}
+ 
+const http = new Http() as any
+Base(Http)
+http.fn()
+
+/**
+ * 方法装饰器 MethodDecorator 接受三个参数
+ * @param target 原型对象 不再是构造函数
+ * @param key 方法的名字
+ * @param descriptor PropertyDescriptor 描述符
+ * */
+const Get = (url:string) => {
+	const fn:MethodDecorator = (target:any, key , descriptor:PropertyDescriptor) => {
+		axios.get(url).then((res) => {
+			descriptor.value(res.data)
+		})
+	}
+	return fn
+}
+ 
+const Post = (url:string) => {
+	const fn:MethodDecorator = (target:any,key, descriptor:PropertyDescriptor) => {
+		axios.post(url).then((res)=>{
+			descriptor.value(res.data)
+		})
+	}
+}
+ 
+@Base('鹤鸣')
+class Http {
+	@Get('https://api.apiopen.top/api/getHaoKanVideo?page=0&size=10')
+	getList(@Result() data: any) {
+		console.log(data.result.list, 'data')
+	}
+	
+	@Post('https://api.apiopen.top/api/getHaoKanVideo?page=0&size=10')
+	create() {
+	
+	}
+}
+
+ 
+/**
+ * 参数装饰器 ParameterDecorator
+ * @param  target 原型对象
+ * @param  key 方法名
+ * @param index 数据所在的位置
+ * @param  reflect-metadata  数据的反射
+ * */
+ 
+const Result = () => {
+	const fn: ParameterDecorator = (target, key, index) => {
+		Reflect.defineMetadata('key', 'result', target)
+	}
+	return fn
+}
+ 
+ 
+@Base('鹤鸣')
+class Http {
+	@Name
+	heming: string
+	
+	constructor() {
+		this.heming = '鹤鸣'
+	}
+	
+	@Get('https://api.apiopen.top/api/getHaoKanVideo?page=0&size=10')
+	getList(@Result() data: any) {
+		console.log(data, 'data')
+	}
+	
+	// @Post('https://api.apiopen.top/api/getHaoKanVideo?page=0&size=10')
+	create() {
+	
+	}
+}
+ 
+const http = new Http() as any
+
+// 综合
+// 1.类装饰器 ClassDecorator  target 返回的是一个构造函数
+//2.属性装饰器 PropertyDecorator
+//3.参数装饰器 ParameterDecorator
+// 4.方法装饰器 MethodDecorator PropertyDescriptor
+// 5.装饰器工长
+// 6. import 'reflect-metadata'
+// 7.axios
+import axios from 'axios';
+import 'reflect-metadata'
+ 
+/**
+ * 类装饰器  ClassDecorator
+ * @param target  形参  target 是形参，可以是任何名字
+ * @param  result  返回结果：构造函数
+ * @param name
+ * */
+// const Base:ClassDecorator = (target)=>{
+// 	target.prototype.heming  = "鹤鸣"
+// 	target.prototype.fn = () =>{
+// 		console.log('装饰器')
+// 	}
+// }
+ 
+// 如果用户要传参数可以使用（闭包 或者 函数柯里化 或者 工厂函数）
+const Base = (name: string) => {
+	const fn: ClassDecorator = (target) => {
+		target.prototype.heming = name
+		target.prototype.fn = () => {
+			// console.log('装饰器')
+		}
+	}
+	return fn
+}
+ 
+/**
+ * 方法装饰器 MethodDecorator 接受三个参数
+ * @param target 原型对象 不再是构造函数
+ * @param key 方法的名字
+ * @param descriptor PropertyDescriptor 描述符
+ * */
+const Get = (url: string) => {
+	const fn: MethodDecorator = (target: any, _key: any, descriptor: PropertyDescriptor) => {
+		let key = Reflect.getMetadata('key', target)
+		axios.get(url).then((res) => {
+			descriptor.value(key ? res.data[key] : res.data)
+		})
+	}
+	return fn
+}
+ 
+// const Post = (url:string) => {
+// 	const fn:MethodDecorator = (target:any,key, descriptor:PropertyDescriptor) => {
+// 		axios.post(url).then((res)=>{
+// 			descriptor.value(res.data)
+// 		})
+// 	}
+// }
+ 
+/**
+ * 参数装饰器 ParameterDecorator
+ * @param  target 原型对象
+ * @param  key 方法名
+ * @param index 数据所在的位置
+ * @param  reflect-metadata  数据的反射
+ * */
+ 
+const Result = () => {
+	const fn: ParameterDecorator = (target, key, index) => {
+		Reflect.defineMetadata('key', 'result', target)
+	}
+	return fn
+}
+ 
+/**
+ * 属性装饰器 PropertyDecorator
+ * @param target 原型对象
+ * @param key 属性
+ * */
+const Name: PropertyDecorator = (target, key) => {
+	console.log(target, key)
+}
+ 
+@Base('鹤鸣')
+class Http {
+	@Name
+	heming: string
+	
+	constructor() {
+		this.heming = '鹤鸣'
+	}
+	
+	@Get('https://api.apiopen.top/api/getHaoKanVideo?page=0&size=10')
+	getList(@Result() data: any) {
+		console.log(data, 'data')
+	}
+	
+	// @Post('https://api.apiopen.top/api/getHaoKanVideo?page=0&size=10')
+	create() {
+	
+	}
+}
+ 
+const http = new Http() as any
+// console.log(http.heming)
+ 
+// 或者怕不兼容可以
+// class Http{
+//
+// }
+//
+// const http = new Http() as any
+// Base(Http)
+// http.fn()
+ 
+ 
 ```
 
 # 项目中使用TS
