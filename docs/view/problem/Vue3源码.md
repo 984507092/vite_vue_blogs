@@ -882,7 +882,7 @@ state.obj2.name = 2
 
 实际上，上文中的 `bucket` 是这样的：
 
-<img src="../../img/bucket.png"> 
+<img src="/docs/public/vue/bucket.png"> 
 
 问题在哪呢，打断点会发现，诶？关键问题在于`reactive`函数中，他把对象也当属性塞进去了，那咋搞呢？递归！！！
 
