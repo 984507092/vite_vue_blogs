@@ -32,8 +32,15 @@ const isDirectory = (path) => fs.lstatSync(path).isDirectory()
 // 取差值
 const intersections = (arr1, arr2) => Array.from(new Set(arr1.filter((item) => !new Set(arr2).has(item))))
 
+
+/**
+ * @param { string } params 项目文件名
+ * @param {  string } path1 项目路径
+ * @param {  string } pathname 项目地址
+ * @param { boolean } sort 是否排序
+ */
 // 把方法导出直接使用
-function getList(params, path1, pathname) {
+function getList(params, path1, pathname, sort) {
     // 存放结果
     const res = []
     // 开始遍历params
@@ -65,13 +72,16 @@ function getList(params, path1, pathname) {
             });
         }
     }
-    // res.sort((a, b) => {
-//   console.log(a,'a');
-//   console.log(b,'b');
-        // let indexA = a.link.split(".")[0]
-        // let indexB = b.link.split(".")[0]
-        // return indexA - indexB;
-    // })
+
+    // 进行排序
+    if (sort) {
+        res.sort((a, b) => {
+            let indexA = a.link.split(".")[0]
+            let indexB = b.link.split(".")[0]
+            return indexA - indexB;
+        })
+    }
+
     // 对name做一下处理，把后缀删除
     res.map((item) => {
         item.text = item.text.replace(/\.md$/, "");
@@ -83,7 +93,12 @@ function getList(params, path1, pathname) {
     }
 }
 
-export const set_sidebar = (pathname) => {
+
+/**
+ * @param {  string } pathname 项目地址
+ * @param { boolean } sort 是否排序
+ */
+export const set_sidebar = (pathname, sort = false) => {
     // 获取pathname的路径
     const dirPath = path.join(platformIndependentPath, pathname)
     // 读取pathname下的所有文件或者文件夹
@@ -91,5 +106,5 @@ export const set_sidebar = (pathname) => {
     // 过滤掉
     const items = intersections(files, WHITE_LIST)
     // getList 函数后面会讲到
-    return getList(items, dirPath, pathname)
+    return getList(items, dirPath, pathname, sort)
 }

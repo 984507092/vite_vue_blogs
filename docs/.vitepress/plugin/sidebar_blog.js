@@ -7,6 +7,7 @@ let arr = [
   {
     text: "博客",
     link: "view/learningNotes",
+    sort: true
   },
   {
     text: "问题",

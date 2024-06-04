@@ -9,7 +9,7 @@ import { set_sidebar } from "./auto-gen-sidebar.mjs";
 export default function formatDataSidebar(arr, style = false) {
   let mySidebar;
   arr.forEach((item) => {
-    let data = set_sidebar(item.link);
+    let data = set_sidebar(item.link, item.sort);
     if (Array.isArray(data.items) && data.items.length > 0) {
       data.items.forEach((key) => {
         if (key.items && typeof key.items === 'object') {
@@ -60,8 +60,7 @@ export default function formatDataSidebar(arr, style = false) {
         ...data
       };
     }
-
   });
 
-  return mySidebar;
+  return mySidebar
 }
