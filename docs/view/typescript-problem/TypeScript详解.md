@@ -1,7 +1,7 @@
 ---
 title: TypeScript详解
-author: 皮明宇
-date: 2024.03.27
+author: 鹤鸣
+date: 2024.05.07
 ---
 
 # TypeScript 详解

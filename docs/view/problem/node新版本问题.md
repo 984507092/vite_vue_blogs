@@ -1,3 +1,7 @@
+---
+date: 2024-06-04
+---
+
 # nodejs新版本引起的：digital envelope routines::unsupported
 
 ## 一、起因
@@ -9,7 +13,7 @@ this[kHandle] = new _Hash(algorithm, xofLen);
 
 Error: error:0308010C:digital envelope routines::unsupported
 
-<img src="/public/2024-06-04-1.png"  />
+<img src="/public/problem/2024-06-04-1.png"  />
 
 ## 二、探索
 
@@ -34,7 +38,7 @@ node.js 的版本问题
 
 2.当次运行的命令窗口有效：在你当前文件的cmd命令窗口输入：SET NODE_OPTIONS=--openssl-legacy-provider， 回车后输入 npm运行命令
 
-<img src="/public/2024-06-04-2.png"  />
+<img src="/public/problem/2024-06-04-2.png"  />
 
 这种做法，就是每次运行都要输入SET NODE_OPTIONS=--openssl-legacy-provider，来告诉nodejs,别使用最新的SSL3.0,还是使用以前旧版本的。
 
@@ -42,11 +46,11 @@ node.js 的版本问题
 
 网上一些答主的做法：
 
-<img src="/public/2024-06-04-3.png"  />
+<img src="/public/problem/2024-06-04-3.png"  />
 
  分析下他做法错误之处：首先，他打开cmd之后，直接回车
 
- <img src="/public/2024-06-04-4.png"  />
+ <img src="/public/problem/2024-06-04-4.png"  />
 
  这种做法很傻，因为你起码要进入到对应文件的位置，不然的话，不出意外的话，就出意外了。
 

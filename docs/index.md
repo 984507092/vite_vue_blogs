@@ -11,7 +11,7 @@ hero:
   actions:
     - theme: brand  #主题
       text: 知识汇总  # 按钮文字
-      link: /view/learningNotes/99.api-examples # 跳转链接
+      link: /view/learningNotes/1.函数防抖和节流 # 跳转链接
 
     - theme: alt
       text: 学习笔记

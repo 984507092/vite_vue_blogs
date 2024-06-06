@@ -8,6 +8,9 @@ import naive from 'naive-ui'
 import 'vfonts/Lato.css'
 import Layout from "./Layout.vue"
 
+// 自动注册全局组件
+import autoRegister from '../../components/formatStyle/autoRegister'
+
 
 // vite如下配置
 import 'virtual:uno.css'
@@ -19,5 +22,6 @@ export default {
   Layout: Layout,
   enhanceApp({ app, router, siteData }) {
     app.use(naive)
+    app.use(autoRegister)
   }
 }

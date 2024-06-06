@@ -1,3 +1,9 @@
+---
+title: TypeScript详解
+author: 鹤鸣
+date: 2024.05.06
+---
+
 # 练习
 
 ## keyof 及 in 的概念及用法
