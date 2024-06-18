@@ -10,6 +10,11 @@ let arr = [
     sort: true
   },
   {
+    text: "黄金屋",
+    link: "view/goldenHouse",
+    sort: true
+  },
+  {
     text: "问题",
     link: "view/problem",
   },
