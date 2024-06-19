@@ -1,12 +1,34 @@
 import { defineConfig } from "vitepress";
 import mySidebar from "./plugin/sidebar_blog.js";
 import UnoCSS from 'unocss/vite'
+import viteCompression from 'vite-plugin-compression';
 
 export default defineConfig({
   vite: {
     plugins: [
       UnoCSS(),
+      viteCompression({
+        ext: '.gz',
+        threshold: 10240, // 单位b
+        algorithm: 'gzip', // 压缩算法
+        deleteOriginFile: false, // 删除源文件
+        filter: (source) => {
+          // 排除特定文件 
+          return !(/\.(jpg|jpeg|png|gif|webp|svg)$/i).test(source);
+        },
+      })
     ],
+    build: {
+      target: 'es2015',
+      minify: 'terser',
+      terserOptions: {
+        compress: {
+          // 生产环境时移除console
+          drop_console: true,
+          drop_debugger: true
+        }
+      }
+    },
     server: {
       proxy: {
         '/api': {
@@ -77,6 +99,7 @@ export default defineConfig({
           },
         ],
       },
+      { text: "皮辟博客", link: "https://ppblogs.cn/" },
     ],
     // 侧边栏
     sidebar: mySidebar,
@@ -109,6 +132,12 @@ export default defineConfig({
         },
         link: "https://gitee.com/pimingyu/vitepress",
       },
+      {
+        icon: {
+          svg: '<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="180.000000pt" height="180.000000pt" viewBox="0 0 180.000000 180.000000" preserveAspectRatio="xMidYMid meet"><g transform="translate(0.000000,180.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none"><path d="M0 900 l0 -900 900 0 900 0 0 900 0 900 -900 0 -900 0 0 -900z m1055 585 c108 -29 184 -73 271 -160 88 -87 140 -177 169 -290 33 -128 9 -302 -57 -428 -39 -73 -152 -192 -222 -232 -89 -52 -173 -77 -281 -82 -183 -10 -327 47 -460 181 -133 134 -181 259 -172 451 6 135 30 209 101 314 81 119 208 209 346 245 74 20 231 20 305 1z"/><path d="M688 1209 c-117 -77 -219 -148 -225 -157 -14 -17 -19 -288 -5 -308 14 -21 432 -294 449 -293 10 0 112 64 228 142 l210 142 3 161 2 160 -202 136 c-112 74 -213 140 -225 146 -20 11 -43 -2 -235 -129z m180 -66 l-3 -88 -84 -57 -83 -57 -64 42 c-35 23 -64 45 -64 49 0 9 280 198 293 198 4 0 6 -39 5 -87z m220 -4 c75 -50 141 -95 145 -99 9 -8 -103 -90 -123 -90 -5 0 -46 24 -90 53 l-80 52 0 88 c0 48 2 87 5 87 3 0 67 -41 143 -91z m-113 -286 c-35 -23 -68 -43 -71 -43 -9 0 -134 81 -134 86 0 2 30 24 66 48 l67 44 68 -45 69 -46 -65 -44z m-377 66 c12 -8 22 -17 22 -21 0 -4 -20 -21 -45 -38 l-45 -31 0 67 0 66 23 -14 c12 -8 32 -21 45 -29z m682 -19 c0 -33 -3 -60 -7 -60 -5 0 -27 13 -50 28 l-43 28 43 31 c23 17 45 32 50 32 4 1 7 -26 7 -59z m-495 -107 l85 -56 0 -89 c0 -48 -2 -88 -5 -88 -10 0 -295 193 -295 200 0 6 119 90 128 90 1 0 40 -25 87 -57z m393 12 c34 -22 62 -42 62 -45 0 -4 -152 -106 -271 -183 l-29 -19 0 90 0 89 83 56 c45 31 85 55 88 54 3 -1 33 -20 67 -42z"/></g></svg>',
+        },
+        link: 'https://codepen.io/heming-yanxing'
+      }
     ],
     footer: {
       message: "Released under the MIT License.",

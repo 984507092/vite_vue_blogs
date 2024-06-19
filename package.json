@@ -3,7 +3,8 @@
     "naive-ui": "^2.38.1",
     "sass": "^1.75.0",
     "unocss": "^0.59.4",
-    "vfonts": "^0.0.3"
+    "vfonts": "^0.0.3",
+    "vite-plugin-compression": "^0.5.1"
   },
   "scripts": {
     "docs:dev": "vitepress dev docs",
