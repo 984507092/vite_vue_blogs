@@ -8,13 +8,13 @@
       </div>
     </div>
     <div>
-      <div class="mt-5 mb-5 w-180">
+      <div class="mt-5 mb-5 w-180 ml-5">
         <n-input-group>
           <n-input
             v-model:value="formValue.title"
             @input="handleInputSearch"
             placeholder="输入标题"
-            :style="{ width: '88%' }"
+            :style="{ width: '85%' }"
           />
           <n-button type="primary" @click="handleFormSearch" ghost>搜索</n-button>
         </n-input-group>
