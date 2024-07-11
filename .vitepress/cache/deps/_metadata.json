@@ -1,40 +1,40 @@
 {
-  "hash": "ff1e8fc2",
-  "configHash": "bafd5ce4",
-  "lockfileHash": "8a7aff53",
-  "browserHash": "bfacd2f9",
+  "hash": "b3ffc8f8",
+  "configHash": "49cebc1e",
+  "lockfileHash": "e2f0e002",
+  "browserHash": "1cb61b74",
   "optimized": {
     "vue": {
-      "src": "../../../node_modules/.pnpm/vue@3.4.25/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+      "src": "../../../node_modules/.pnpm/vue@3.4.31/node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "e464dc79",
+      "fileHash": "f91dc60b",
       "needsInterop": false
     },
     "vitepress > @vue/devtools-api": {
-      "src": "../../../node_modules/.pnpm/@vue+devtools-api@7.1.2_vue@3.4.25/node_modules/@vue/devtools-api/dist/index.js",
+      "src": "../../../node_modules/.pnpm/@vue+devtools-api@7.3.5/node_modules/@vue/devtools-api/dist/index.js",
       "file": "vitepress___@vue_devtools-api.js",
-      "fileHash": "baab84c7",
+      "fileHash": "6ac20d51",
       "needsInterop": false
     },
     "vitepress > @vueuse/core": {
-      "src": "../../../node_modules/.pnpm/@vueuse+core@10.9.0_vue@3.4.25/node_modules/@vueuse/core/index.mjs",
+      "src": "../../../node_modules/.pnpm/@vueuse+core@10.11.0_vue@3.4.31/node_modules/@vueuse/core/index.mjs",
       "file": "vitepress___@vueuse_core.js",
-      "fileHash": "18c16867",
+      "fileHash": "3d8b9e7d",
       "needsInterop": false
     },
     "@theme/index": {
-      "src": "../../../node_modules/.pnpm/vitepress@1.1.3_@algolia+client-search@4.23.3_@types+node@20.12.7_async-validator@4.2.5_axios_y543wtflpytwciuypowhjyw6q4/node_modules/vitepress/dist/client/theme-default/index.js",
+      "src": "../../../node_modules/.pnpm/vitepress@1.3.0_@algolia+client-search@4.24.0_@types+node@20.14.10_async-validator@4.2.5_axio_vcjiroeh72oi3utmp5eszibrmm/node_modules/vitepress/dist/client/theme-default/index.js",
       "file": "@theme_index.js",
-      "fileHash": "24570b8d",
+      "fileHash": "618bddfe",
       "needsInterop": false
     }
   },
   "chunks": {
-    "chunk-VB72AMQ6": {
-      "file": "chunk-VB72AMQ6.js"
+    "chunk-UUIDCGQA": {
+      "file": "chunk-UUIDCGQA.js"
     },
-    "chunk-GNWCGSRR": {
-      "file": "chunk-GNWCGSRR.js"
+    "chunk-CGFDJW4T": {
+      "file": "chunk-CGFDJW4T.js"
     }
   }
 }
