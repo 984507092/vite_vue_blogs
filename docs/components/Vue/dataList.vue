@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <div class="flex flex-items-center justify-between">
-      <h3 class="!m-0 p-0">TS系列文章：</h3>
+      <h3 class="!m-0 p-0">vue系列文章：</h3>
       <div>
         一共
         <strong>{{ page.length }}</strong> 篇
@@ -23,8 +23,7 @@
 
 <script setup lang='ts'>
 import { ref, reactive, onMounted } from "vue";
-import { data as page } from "../../common/autoTypeScript.data.mjs";
-
+import { data as page } from "../../common/autoVue.data.mjs";
 
 defineExpose({
   page
