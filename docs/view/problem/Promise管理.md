@@ -5,10 +5,13 @@ date: 2024.03.20
 ---
 
 # promise管理
+
 对pormise函数进行一些额外的操作来实现一些逻辑。
 
 ## 定义promise数组
+
 定义一个数组，数组里面都是方法，方法返回一个promise
+
 ```js
 const interval = 100;
 const setPromiseArray = (num) => {
@@ -24,6 +27,7 @@ const promiseArr = setPromiseArray(100);
 ```
 
 ## 如何让多个promise方法并行
+
 ```js
 Promise.all(promiseArr.map(v => v())).then(res => {
     console.log(res)
@@ -31,6 +35,7 @@ Promise.all(promiseArr.map(v => v())).then(res => {
 ```
 
 ## 如何让多个promise方法串行
+
 ```js
 promiseArr.reduce((pre, cur) => {
     return pre.then(res => {
@@ -43,7 +48,9 @@ promiseArr.reduce((pre, cur) => {
 ```
 
 ## 如何设计一个窗口
+
 窗口大小是一个正整数，最多只允许窗口大小的promise并行；
+
 ```js
 const promisePipe = (promiseArr, windowLen) => {
     if (promiseArr.length <= windowLen) {
@@ -66,7 +73,9 @@ promisePipe(promiseArr, 10)
 ```
 
 ## 设计一个wrap方法
+
 wrap方法,传入一个promise，函数正常执行的时候返回这个promise的结果，同时随时可以abort promise
+
 ```js
 const wrap = (promise) => {
     let _reject;
@@ -130,10 +139,12 @@ Promise.race([promise1, promise2, promise3])
 ```
 
 ::: details 结果
+
 ```js
 // 2
 // Resolved: Promise 2 resolved
 // 1
 // 3
 ```
+
 :::

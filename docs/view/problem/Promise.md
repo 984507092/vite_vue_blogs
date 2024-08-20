@@ -18,20 +18,25 @@ date: 2024.03.19
 [rule--]
 
 Promise 的 status:
+
 1. `pending`
+
 - 初始的状态，可改变，
 - 一个promise 在`resolve’`/`reject`前都处于这个状态
 - 我们可以通过调用`resolve’`方法或`reject`方法，让这个promise，变成`fulfilled`/`rejected`状态;
   
 2. `fulfilled`
+
 - 不可变状态
 - 在`resolve`之后，变成这个状态，拥有一个`value`
 
 3. `rejected`
+
 - 不可变状态
 - 在`reject`之后，变成这个状态，拥有一个`reason`
 
 then函数：
+
 1. 参数:
 `onFulfilled`必须是函数类型，如果不是，应该被忽略;
 `onRejected`必须是函数类型，如果不是，应该被忽略;
@@ -43,6 +48,7 @@ then函数：
 [--rule]
 
 ## 一、申明promise类
+
 进行初始化的一些操作
 
 ```js
@@ -161,17 +167,20 @@ MyPromise.prototype.then = function (onFulfilled, onRejected) {
     return promise2;
 }
 ```
-[qestion] 
+
+[qestion]
 
 [rule--]
 
 onFulfilledCallbacks 和 onRejectedCallbacks为什么是数组？
+
 - 因为then可以被链式调用，且是按照then的顺序执行，或者说注册顺序
 - 同时数组每个内容都应该是一个promise
   
 [--rule]
 
 ## 三、写catch方法
+
 ```js
 class MyPromise {
   catch(onRejected) {
@@ -181,7 +190,9 @@ class MyPromise {
 ```
 
 ## 四、测试
+
 - 完整代码
+
 ```js
 function MyPromise(callback) {
     // 初始化状态为 pending
@@ -301,6 +312,7 @@ MyPromise.prototype.catch = function (onRejected) {
 ```
 
 - 测试一下
+
 ```js
 const promise = new MyPromise((resolve, reject) => {
     setTimeout(() => {
@@ -328,6 +340,7 @@ promise.then(value => {
 ```
 
 ::: details 执行结果
+
 ```js
 // 1
 // 成功
@@ -343,10 +356,11 @@ promise.then(value => {
 // }
 // 到最后了:Error: 抛出异常
 ```
+
 <span style="color:red">注意到存在一个MyPromise没有被处理</span>
 :::
 
-[qestion] 
+[qestion]
 
 why?
 
@@ -354,10 +368,11 @@ why?
 
 resolve(x) =>  resolvePromise(promise2, x, resolve,reject)
 
-[rule--] 
+[rule--]
 
 --- 下文看看就行，不需要记忆 ---
 resolvePromise 的规范：
+
 - 如果 promise2和x相等，那么 reject TypeError
 - 如果 x 是一个 promise
     如果 x 是 pending 态，那么 promise 必须要在 pending,直到 x 变成 fulfilled or rejected.
@@ -377,9 +392,8 @@ resolvePromise 的规范：
 
 [--rule]
 
-
-
 ## 五、所以最终版本
+
 ```js
 function MyPromise(callback) {
     // 初始化状态为 pending
@@ -577,6 +591,7 @@ promise.then(value => {
 ```
 
 ::: details 执行结果
+
 ```js
 // 1
 // 成功
@@ -584,5 +599,6 @@ promise.then(value => {
 // 第二次处理结果
 // 到最后了:Error: 抛出异常
 ```
+
 <span style="color:green">完结撒花</span>
 :::

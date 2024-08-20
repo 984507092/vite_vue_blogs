@@ -20,9 +20,7 @@ FP、FCP这两个指标虽然表达了渲染的事件，但对“用户关注的
 
 后来LCP指标被提出来，表示“用于度量视口中最大的内容元素何时可见”，它用来代替FMP，表征页面的关键元素何时可以被用户看到。
 
-
 除了加载性能，还有可交互时间、稳定性指标、流畅性指标，在不同的业务场景都可以被监控用来作为提升用户体验的依据。
-
 
 谷歌一直十分重视网站的用户体验，移动友好性，页面加载速度和HTTPS是Google已经使用的页面排名因素，而2020年，谷歌将Core Web Vitals新纳入的用户体验指标。其中核心的3个就是LCP、FID、CLS。后面会详细说明。
 
@@ -50,7 +48,6 @@ FP、FCP这两个指标虽然表达了渲染的事件，但对“用户关注的
 白屏时间 = 地址栏输入网址后回车 - 浏览器出现第一个元素
 
 首屏时间 = 地址栏输入网址后回车 - 浏览器第一屏渲染完成
-
 
 根据白屏和首屏的定义，我们可以用FP和FCP来计算白屏和首屏。
 
@@ -208,6 +205,7 @@ DOMContentLoaded事件，当 HTML 文档被完全加载和解析完成之后，D
 </body>
 </html>
 ```
+
 而下面的代码，有10000个div，FP会在DCL前面。
 
 ```html
@@ -292,14 +290,11 @@ const timeToInteractive = performance.timing.domInteractive - performance.timing
 
 TTI的计算方法参考文章：深入浅出前端监控
 
-
-
 这里定义一下什么是完全可交互状态的页面：
 
 页面已经显示有用内容。
 页面上的可见元素关联的事件响应函数已经完成注册。
 事件响应函数可以在事件发生后的 50ms 内开始执行（主线程无 Long Task）。
-
 
 计算方法描述如下：
 
@@ -363,6 +358,7 @@ getCLS(console.log);
 减少CLS的方法，参考文章：页面视觉稳定性之CLS
 
 ## 5. 流畅性指标
+
 FPS
 Chrome DevTool 中有一栏 Rendering 中包含 FPS 指标，但目前浏览器标准中暂时没有提供相应 API ，只能手动实现。这里需要借助 requestAnimationFrame 方法模拟实现，浏览器会在下一次重绘之前执行 rAF 的回调，因此可以通过计算每秒内 rAF 的执行次数来计算当前页面的 FPS。
 
@@ -372,6 +368,7 @@ longTask
 长任务监听，PerformanceObserver 监听，参考上面TTI一节中长任务的监听。
 
 ## 6. Core Web Vitals
+
 Core Web Vitals是谷歌提出的，衡量用户体验的新指标，指标将被纳入谷歌搜索引擎的网页排名。
 
 Core Web Vitals是用户体验和SEO的重要指标。
@@ -392,4 +389,3 @@ getCLS(console.log);
 getFID(console.log);
 getLCP(console.log);
 ```
-

@@ -63,5 +63,4 @@ node.js 的版本问题
 四、最后#
 记录下闲话，最近在部署vue程序在老旧的windows服务器上，老旧的服务器是至强cpu，iis6.0的，使用起来真操蛋，关键该服务器还是在内网中的，部署起来要远程连接到另一台电脑，另一台电脑再连接到这台服务器上，需要上传部署文件都要先通过微信发给医院内部的人，医院内部的人帮我们传到这台服务器上，是的，远程连接不支持传文件，真操蛋，医院又不给我们权限，自己上传，部署起来真心累，周六日这两天都用来搞这玩意了，最后因为iis没办法安装url重写和APR路由映射，果断放弃使用iis,使用了nginx,浪费老子这么多时间！！！！
 
-
 参考文章：<a class="cursor-pointer" target="_blank" href="https://www.cnblogs.com/hmy-666/p/16949982.html">digital envelope routines::unsupported</a>

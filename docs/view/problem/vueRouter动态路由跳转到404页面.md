@@ -30,8 +30,8 @@ date: 2024-06-05
 
 ```js
 [
-	{ path: '/home', name: 'home', component: Home },
-	{ path: '/vip', name: 'vip', component: Vip }
+ { path: '/home', name: 'home', component: Home },
+ { path: '/vip', name: 'vip', component: Vip }
 ]
 ```
 
@@ -43,24 +43,24 @@ date: 2024-06-05
 
 ```js
 const router = createRouter({
-	history: createWebHistory(import.meta.env.BASE_URL),
-	scrollBehavior: () => ({ y: 0 }),
-	routes: [
-		// 重定向到 /home 路径
-		{ path: '/', redirect: "/home", },
-		{ path: '/home', name: 'home', component: Home },
-		{ path: '/vip', name: 'vip', component: Vip },
-		// 404 页面
-		{
-		    path: "/404",
-		    name: "NotFound",
-		    component: () => import("@views/404.vue"),
-		    hidden: true,
-		    meta: { title: "404" },
-		},
-		// 当什么都没有匹配到的时候，重定向页面到 404 页面
-		{ path: "/:pathMatch(.*)", redirect: "/404", name: "notMatch", hidden: true },
-	],
+ history: createWebHistory(import.meta.env.BASE_URL),
+ scrollBehavior: () => ({ y: 0 }),
+ routes: [
+  // 重定向到 /home 路径
+  { path: '/', redirect: "/home", },
+  { path: '/home', name: 'home', component: Home },
+  { path: '/vip', name: 'vip', component: Vip },
+  // 404 页面
+  {
+      path: "/404",
+      name: "NotFound",
+      component: () => import("@views/404.vue"),
+      hidden: true,
+      meta: { title: "404" },
+  },
+  // 当什么都没有匹配到的时候，重定向页面到 404 页面
+  { path: "/:pathMatch(.*)", redirect: "/404", name: "notMatch", hidden: true },
+ ],
 })
 
 ```
@@ -93,49 +93,49 @@ router.removeRoute('home')
 ```js
 // router.js
 const router = createRouter({
-	history: createWebHistory(import.meta.env.BASE_URL),
-	scrollBehavior: () => ({ y: 0 }),
-	routes: [
-		// 重定向到 /home 路径
-		{ path: '/', redirect: "/home", },
-		{ path: '/home', name: 'home', component: Home },
-		// 404 页面
-		{
-		    path: "/404",
-		    name: "NotFound",
-		    component: () => import("@views/404.vue"),
-		    hidden: true,
-		    meta: { title: "404" },
-		},
-		// 当什么都没有匹配到的时候，重定向页面到 404 页面
-		{ path: "/:pathMatch(.*)", redirect: "/404", name: "notMatch", hidden: true },
-	],
+ history: createWebHistory(import.meta.env.BASE_URL),
+ scrollBehavior: () => ({ y: 0 }),
+ routes: [
+  // 重定向到 /home 路径
+  { path: '/', redirect: "/home", },
+  { path: '/home', name: 'home', component: Home },
+  // 404 页面
+  {
+      path: "/404",
+      name: "NotFound",
+      component: () => import("@views/404.vue"),
+      hidden: true,
+      meta: { title: "404" },
+  },
+  // 当什么都没有匹配到的时候，重定向页面到 404 页面
+  { path: "/:pathMatch(.*)", redirect: "/404", name: "notMatch", hidden: true },
+ ],
 })
 
 export default router;
 
 // api.js
 export const login = async () => {
-	// 执行登录操作
-	let res = await dologin();
+ // 执行登录操作
+ let res = await dologin();
 
-	if (res.sucess) {
-		await storeUserInfo(res);
-		// 登录成功，动态的添加 vip 路由
-		router.addRoute({ path: '/vip', name: 'vip', component: Vip });
-	}
+ if (res.sucess) {
+  await storeUserInfo(res);
+  // 登录成功，动态的添加 vip 路由
+  router.addRoute({ path: '/vip', name: 'vip', component: Vip });
+ }
 }
 
 // permission.js
 router.beforeEach(async (to, from, next) => {
-	// 如果存在用户信息
-	if (await getUserInfo()) {
-		// 如果 vip 这个 router 没有初始化，那么动态的增加 vip 路由
-		if (!router.hasRoute("vip")) {
-			router.addRoute({ path: '/vip', name: 'vip', component: Vip });
-		}
+ // 如果存在用户信息
+ if (await getUserInfo()) {
+  // 如果 vip 这个 router 没有初始化，那么动态的增加 vip 路由
+  if (!router.hasRoute("vip")) {
+   router.addRoute({ path: '/vip', name: 'vip', component: Vip });
+  }
     }
-	next();
+ next();
 });
 
 router.afterEach((to) => {
@@ -146,7 +146,6 @@ router.afterEach((to) => {
 ```
 
 经过改造之后，我们在初始化的时候，没有加入 vip 路由，那么你即使直接通过 `https://example.com/vip` 链接也无法访问到该页面，会被最后的 notMatch 路由匹配到，最后被重定向到 404 页面。
-
 
 关于 noMatch 路由的用法，不了解的小伙伴，可以参考下 vue-router 官方文档：<a class="cursor-pointer" target="_blank" href="https://router.vuejs.org/guide/essentials/dynamic-matching.html#catch-all-404-not-found-route">Dynamic Route Matching with Params | Vue Router。</a>他的作用是，确保当路由没有匹配到的时候，永远能正确的将页面导航到 404 页面。
 
@@ -207,26 +206,26 @@ router.afterEach((to) => {
 ```js
 // permission.js
 router.beforeEach(async (to, from, next) => {
-	// 如果存在用户信息
-	if (await getUserInfo()) {
-		// 如果 vip 这个 router 没有初始化，那么动态的增加 vip 路由
-		if (!router.hasRoute("vip")) {
-			router.addRoute({ path: '/vip', name: 'vip', component: Vip });
-		}
+ // 如果存在用户信息
+ if (await getUserInfo()) {
+  // 如果 vip 这个 router 没有初始化，那么动态的增加 vip 路由
+  if (!router.hasRoute("vip")) {
+   router.addRoute({ path: '/vip', name: 'vip', component: Vip });
+  }
 
-		// 如果当前路由目标是 /404，且来自 /vip
-		if (to.name === "NotFound" && to.redirectedFrom?.path === "/vip") {
-			// 重定向到 /vip 路由
-			next({
-				path: to.redirectedFrom.path,
-				query: to.redirectedFrom.query,
-				replace: true,
-			});
-			return;
-		}
+  // 如果当前路由目标是 /404，且来自 /vip
+  if (to.name === "NotFound" && to.redirectedFrom?.path === "/vip") {
+   // 重定向到 /vip 路由
+   next({
+    path: to.redirectedFrom.path,
+    query: to.redirectedFrom.query,
+    replace: true,
+   });
+   return;
+  }
     }
     
-	next();
+ next();
 });
 
 ```

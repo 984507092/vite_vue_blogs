@@ -81,14 +81,14 @@ react：单向数据流
 1. 全局引用组件
 2. 函数式组件
 
-#### mixin （本质就是mixin先执行，component后执行）
+#### mixin （本质就是 mixin 先执行，component 后执行）
 
 1. 支持递归合并
 2. data冲突的时候，组件data会覆盖
 3. 涉及生命周期不会覆盖，但是mixin的优先级会高于component
 4. 可以有多个
 
-#### extends（本质就是extends先执行，component后执行）
+#### extends（本质就是 extends 先执行，component 后执行）
 
 1. 只可以有一个
 

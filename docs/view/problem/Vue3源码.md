@@ -7,9 +7,11 @@ date: 2024.04.17
 # Vue3源码
 
 ## compiler-core
+
 vue3 编译的核心，字符串模板转AST，最后渲染成真是的代码块
 
 ## reactivity
+
 isReadOnly isReactive ref isRef
 
 Q:为什么reactiveMap使用weakMap定义？
@@ -17,13 +19,15 @@ Q:为什么reactiveMap使用weakMap定义？
 A:
 
 1. weakMap接受对象类型作为key
- 
+
 2. 无引用会被回收
 
 ## runtime-dom
+
 Vue3实现了VNode组成的VDOM，天然的支持了跨平台的能力，runtime-dom为跨平台提供了渲染器的能力
 
 ## runtime-test
+
 runtime-dom的延展，是对外提供runtime-dom的环境的测试，是为了方便测试runtime-core
 
 ## 实现一个响应式
@@ -31,6 +35,7 @@ runtime-dom的延展，是对外提供runtime-dom的环境的测试，是为了�
 实现一个effect来实现{{a}}这个形式的响应式功能。
 
 ### 版本1
+
 ```js
 const bucket = new WeakMap()
 // 重新定义bucket数据类型为WeakMap
@@ -99,6 +104,7 @@ data.name = 'foo2'
 ```
 
 ### 版本2
+
 上述有一个什么问题呢，执行下面代码会多执行一次：
 
 ```js
@@ -209,6 +215,7 @@ function reactive(state) {
 ### 版本3
 
 此时还不支持effect嵌套，首先要知道vue中组件执行：
+
 ```js
 const Foo = {
   render () {
@@ -222,6 +229,7 @@ effect(() => {
 ```
 
 当组件发生嵌套时，就会存在effect嵌套:
+
 ```js
 const Bar = {
   render () {
@@ -247,6 +255,7 @@ effect(() => {
 ```
 
 在版本2代码中执行以下代码：
+
 ```js
 const state = reactive({
     foo: true,
@@ -270,6 +279,7 @@ state.bar = false;
 ```
 
 会发现输出是：
+
 ```js
 // effectFn1
 // effectFn2
@@ -394,6 +404,7 @@ setTimeout(() => {
 ```
 
 最后的输出：
+
 ```js
 // effectFn1
 // effectFn2
@@ -404,6 +415,7 @@ setTimeout(() => {
 // Bar true
 // Foo false
 ```
+
 实际上我觉得这里的输出还是存在其他问题的，为什么要输出bar，
 
 未完待续研究吧。
@@ -549,6 +561,7 @@ while (count--) {
 ```
 
 输出为：
+
 ```js
 // num 1
 // num 101
@@ -557,11 +570,13 @@ while (count--) {
 ## 继续,computed
 
 他有什么炫酷的特效么：
+
 1. 依赖追踪
 2. 缓存结果
 3. 懒计算(如果不被引用,就不会执行,坑过我很多次了，一度以为热更新失效了)
-   
+
 ### 懒计算
+
 ```js
 const state = reactive({
   a: 1,
@@ -621,6 +636,7 @@ console.log(sum()); // 3
 ### 依赖追踪
 
 首先封装一个function：
+
 ```js
 function computed (getter) {
   const effectFn = effect(getter, {
@@ -663,7 +679,9 @@ console.log(sum.value)
 ```
 
 ### 缓存
+
 特性：
+
 1. 只有当其依赖的东西发生变化了才需要重新计算
 2. 否则就返回上一次执行的结果
 
@@ -750,6 +768,7 @@ function computed (getter) {
 ```
 
 再试一下：
+
 ```js
 const state = reactive({
     a: 1,
@@ -792,12 +811,14 @@ state.name = '222'
 ```
 
 结果：
+
 ```js
 // raw:111
 // scheduler:222
 ```
 
 ### 支持单属性+回调
+
 ```js
 const watch = (source, cb) => {
   effect(source, {
@@ -820,6 +841,7 @@ state.name = '222'
 ```
 
 ### 支持对象+回调
+
 实际上就是把对象的所有属性全部都拿出来，然后再跟上边一样就好
 
 搞一个广度优先遍历拿到所有属性：
@@ -882,7 +904,7 @@ state.obj2.name = 2
 
 实际上，上文中的 `bucket` 是这样的：
 
-<img src="/public/vue/bucket.png"> 
+<img src="/public/vue/bucket.png">
 
 问题在哪呢，打断点会发现，诶？关键问题在于`reactive`函数中，他把对象也当属性塞进去了，那咋搞呢？递归！！！
 
@@ -911,7 +933,9 @@ function reactive(state) {
 再试一次上面测试用例就好咯，个中具体原因自己打断点研究吧。
 
 ### 新值和旧值
+
 别忘了这个还没实现，那么上代码：
+
 ```js
 const watch = (source, cb) => {
     let getter, oldValue, newValue    // [!code ++]

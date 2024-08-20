@@ -31,7 +31,6 @@ export default defineConfig({
 })
 ```
 
-
 3、在.vitepress/theme/index中导入unocss
 
 ```javascript
