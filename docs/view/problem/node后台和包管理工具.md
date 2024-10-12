@@ -211,7 +211,7 @@ npm install pm2 -g
 whereis pm2
 ```
 
-<img src="../../img/nvmAndNode/findpm2.png" />
+<!-- <img src="../../img/nvmAndNode/findpm2.png" /> -->
 
 因为linux系统默认指令都存在`/usr/local/bin`
 
@@ -237,7 +237,7 @@ pm2 startup
 pm2 start /home/node/vitepressBack/index.js
 ```
 
-<img src="../../img/nvmAndNode/pm2start.png" />
+<!-- <img src="../../img/nvmAndNode/pm2start.png" /> -->
 
 #### 将项目添加到pm2自启管理队列
 
