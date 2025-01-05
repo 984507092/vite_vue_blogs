@@ -7,10 +7,13 @@
 ```ts
 const [isPending, startTransition] = useTransition();
 ```
+
 ### 参数
+
 `useTransition` 不需要任何参数
 
 ### 返回值
+
 `useTransition` 返回一个数组,包含两个元素
 
 1. `isPending`(boolean)，告诉你是否存在待处理的 transition。
@@ -29,7 +32,8 @@ const [isPending, startTransition] = useTransition();
 ```sh
 npm install mockjs
 ```
-mockjs文档地址：https://github.com/nuysoft/Mock/wiki/Getting-Started
+
+mockjs文档地址：<https://github.com/nuysoft/Mock/wiki/Getting-Started>
 
 ```ts
 import { defineConfig } from 'vite'
@@ -71,7 +75,7 @@ export default defineConfig({
 
 编写完成访问我们的接口 `http://localhost:5174/api/list?keyWord=xx` 5174为默认端口，可以自行更改，返回数据如下
 
-![api](./img/api.png)
+'./img/api.png'
 
 #### 前端
 
@@ -79,7 +83,7 @@ export default defineConfig({
 
 在我们的示例中，我们创建了一个简单的输入框和一个列表，用于展示基于输入关键词的结果。以下是组件的主要部分：
 
->Input, Flex, List 来源`antd` https://ant.design/components/input/
+>Input, Flex, List 来源`antd` <https://ant.design/components/input/>
 
 ```sh
 npm install antd
@@ -154,14 +158,14 @@ export default App;
 
 #### 为了更好的测试结果可以在性能中降级cpu渲染速度
 
-![alt text](./img/cpu.png)
+'./img/cpu.png'
 
 ## 注意事项
 
 startTransition必须是同步的
 
-
 错误做法
+
 ```ts
 startTransition(() => {
   // ❌ 在调用 startTransition 后更新状态
@@ -170,6 +174,7 @@ startTransition(() => {
   }, 1000);
 });
 ```
+
 正确做法
 
 ```ts
@@ -200,7 +205,6 @@ startTransition(() => {
   setPage('/about');
 });
 ```
-
 
 ## 原理剖析
 

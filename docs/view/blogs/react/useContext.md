@@ -2,7 +2,7 @@
 
 useContext 提供了一个无需为每层组件手动添加 props，就能在组件树间进行数据传递的方法。设计的目的就是解决组件树间数据传递的问题。
 
-![alt text](./img/useContext.png)
+'./img/useContext.png'
 
 ## 用法
 

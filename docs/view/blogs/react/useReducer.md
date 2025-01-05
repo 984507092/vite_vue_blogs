@@ -4,15 +4,15 @@
 
 `useReducer` 跟 `useState` 一样的都是帮我们管理组件的`状态`的，但是呢与`useState`不同的是 `useReducer` 是`集中式`的管理状态的。
 
-
 ## 用法
 
-![alt text](img/useReducer.png)
+'img/useReducer.png'
 
 ```ts
 const [state, dispatch] = useReducer(reducer, initialArg, init?)
 ```
-### 参数:
+
+### 参数
 
 1. `reducer` 是一个处理函数，用于更新状态, reducer 里面包含了两个参数，第一个参数是 `state`，第二个参数是 `action`。`reducer` 会返回一个新的 `state`。
 
@@ -20,7 +20,7 @@ const [state, dispatch] = useReducer(reducer, initialArg, init?)
 
 3. `init` 是一个可选的函数，用于初始化 `state`，如果编写了init函数，则默认值使用init函数的返回值，否则使用`initialArg`。
 
-### 返回值:
+### 返回值
 
 useReducer 返回一个由两个值组成的数组：
 
@@ -41,14 +41,16 @@ function MyComponent() {
   const [state, dispatch] = useReducer(reducer, { age: 42,name:'小满' });
   // ...
 ```
+
 ## 计数器案例
 
 初始状态 (initialState):
+
 ```ts
 const initialState = { count: 0 };
 ```
-这里定义了一个初始状态对象，包含一个 count 属性，初始值为 0。
 
+这里定义了一个初始状态对象，包含一个 count 属性，初始值为 0。
 
 reducer 函数:
 
@@ -64,6 +66,7 @@ function reducer(state, action) {
   }
 }
 ```
+
 - reducer 是一个用来根据不同的 action 来更新状态的纯函数。
 - 它接收当前状态 (state) 和一个动作对象 (action)，根据 action.type 来决定如何更新 state。
 - 如果 action.type 是 'increment'，则 count 增加 1；如果是 'decrement'，则 count 减少 1。
@@ -84,12 +87,14 @@ const App = () =>  {
 }
 export default App;
 ```
+
 - 当点击 "-" 按钮时，调用 dispatch({ type: 'decrement' })，使 count 减少。
 - 当点击 "+" 按钮时，调用 dispatch({ type: 'increment' })，使 count 增加。
 
 ## 购物车案例
 
 1. 初始数据 (initData):
+
 ```tsx
 const initData = [
   { name: '小满(只)', price: 100, count: 1, id: 1, isEdit: false },
@@ -97,13 +102,16 @@ const initData = [
   { name: '大满(只)', price: 300, count: 1, id: 3, isEdit: false }
 ]
 ```
+
 - initData 是一个数组，表示初始的商品列表。每个商品有以下属性：
   - name: 商品的名称（例如 "小满(只)"）。
   - price: 单价（例如 100）。
   - count: 数量，默认为 1。
   - id: 商品的唯一标识符。
   - isEdit: 表示该商品名称是否处于编辑状态，默认为 false。
+
 2. 类型定义 (List 和 Action):
+
 ```ts
 type List = typeof initData
 interface Action { 
@@ -112,6 +120,7 @@ interface Action {
   newName?: string 
 }
 ```
+
 - List 是商品数组的类型，直接从 initData 推断。
 - Action 接口定义了不同的操作类型：
   - ADD: 增加某个商品的数量。
@@ -121,7 +130,9 @@ interface Action {
   - UPDATE_NAME: 更新某个商品的名称。
   - id: 需要操作的商品的 id。
   - newName: 用于 UPDATE_NAME 操作时，新的商品名称。
+
 3. Reducer 函数 (reducer):
+
 ```tsx
 function reducer(state: List, action: Action) {
   const item = state.find(item => item.id === action.id)!
@@ -145,16 +156,20 @@ function reducer(state: List, action: Action) {
   }
 }
 ```
+
 reducer 函数根据传入的 action 更新商品列表的状态。
 查找到要操作的商品 item。
 
 对不同的 action.type 执行相应操作：
+
 - ADD: 将商品数量增加 1。
 - SUB: 将商品数量减少 1。
 - DELETE: 删除指定商品。
 - EDIT: 切换商品的编辑状态（输入框显示或隐藏）。
 - UPDATE_NAME: 更新商品的名称。
+
 4. App 组件:
+
 ```tsx
 function App() {
   let [data, dispatch] = useReducer(reducer, initData)
@@ -211,6 +226,7 @@ function App() {
   )
 }
 ```
+
 - App 组件使用 useReducer 来管理 data 状态，它从 initData 初始化，并通过 dispatch 分发动作来改变商品列表。
 - 商品列表通过 table 渲染，每个商品显示以下信息：
 - 物品：如果该商品的 isEdit 为 true，显示一个输入框用于修改名称；否则显示商品名称。

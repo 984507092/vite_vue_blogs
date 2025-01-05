@@ -55,7 +55,7 @@ export default App;
 
 我们更改输入框的值，可以看到函数Id在增加，说明函数被重新创建了。
 
-![alt text](./img/useCallback-1.png)
+'./img/useCallback-1.png'
 
 为什么是4呢，因为默认是1，然后输入框更改了3次，所以是4，那么这样好吗？我们使用useCallback来优化一下。
 
@@ -71,7 +71,7 @@ const changeSearch = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
 
 我们可以看到函数Id没有增加，说明函数没有被重新创建。
 
-![alt text](./img/useCallback-2.png)
+'./img/useCallback-2.png'
 
 ## 案例2
 
@@ -116,7 +116,7 @@ export default App;
 
 因为App重新渲染了，所以childCallback函数会被重新创建，然后传递给子组件，子组件会判断这个函数是否发生变化，但是每次创建的函数内存地址都不一样，所以子组件会重新渲染。
 
-![alt text](./img/useCallback-3.png)
+'./img/useCallback-3.png'
 
 :::tip
 只需要在childCallback函数上使用useCallback，就可以优化性能。

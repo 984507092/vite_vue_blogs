@@ -70,7 +70,7 @@ function App() {
 export default App;
 ```
 
-![alt text](./img/useRef-1.png)
+'./img/useRef-1.png'
 
 #### 如何修改？
 
@@ -97,7 +97,7 @@ function App() {
 export default App;
 ```
 
-![alt text](./img/useRef-2.png)
+'./img/useRef-2.png'
 
 ## 实际应用
 
