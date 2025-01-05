@@ -14,6 +14,7 @@ useDeferredValue 用于延迟某些状态的更新，直到主渲染任务完成
 ```ts
 const deferredValue = useDeferredValue(value)
 ```
+
 ### 参数
 
 - value: 延迟更新的值(支持任意类型)
@@ -81,10 +82,9 @@ export default App
 
 ### 效果
 
-![useDeferredValue](../../src/assets/useDeferredValue.gif)
+'../../src/assets/useDeferredValue.gif'
 
 使用 useDeferredValue 后，输入框中的搜索内容不会立即触发列表过滤，避免频繁的渲染。输入停止片刻后(看起来像节流)，列表会自动更新为符合条件的数据，确保了较流畅的交互体验。
-
 
 ## 陷阱
 
